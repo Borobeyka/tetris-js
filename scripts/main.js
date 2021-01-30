@@ -5,7 +5,8 @@ let lastUpdate = 0;
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
     game = new Game();
-    figure = new Figure(0, 0, random(figureColors), random(figures));
+    let figID = int(random(figures.length));
+    figure = new Figure(0, 0, random(figureColors), figures[figID], figID);
 }
 
 function draw() {
@@ -28,11 +29,14 @@ function keyPooling() {
 }
 
 function keyPressed() {
+    //print(keyCode);
     if (key == "Escape") game.paused = !game.paused;
     if (!game.paused) {
-        if (keyCode == 68)
+        if (keyCode == 68) // right
             figure.updateCoords(blockWidth, 0);
-        else if (keyCode == 65)
+        else if (keyCode == 65) // left
             figure.updateCoords(-blockWidth, 0);
+        else if (keyCode == 82) // rotate (r)
+            figure.rotate();
     }
 }

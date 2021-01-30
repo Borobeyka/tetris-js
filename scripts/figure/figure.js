@@ -1,17 +1,34 @@
 class Figure {
-    constructor(x, y, color, figure) {
+    constructor(x, y, color, figure, figureID) {
         this.x = x;
         this.y = y;
         this.color = color;
+        this.blocks = [];
+        this.figureID = figureID;
+        this.builtBlocks(figure, figureID);
+        this.rotated = false;
+
+        setInterval(() => {
+            this.check();
+        }, updatePerMillis / 10);
+    }
+
+    builtBlocks(figure) {
         this.blocks = [];
         for (let i = 0; i < figure.length; i++)
             for (let j = 0; j < figure[i].length; j++)
                 if (figure[i][j] != 0)
                     this.blocks.push(new Block(this.x + j * blockWidth, this.y + i * blockWidth, this.color));
+    }
 
-        setInterval(() => {
-            this.check();
-        }, updatePerMillis / 10);
+    rotate() {
+        let fig = figures[this.figureID];
+        if (!this.rotated)
+            for (let i = 0; i < 3; i++)
+                fig = fig[0].map((_, index) => fig.map(row => row[index]).reverse());
+        this.rotated = !this.rotated;
+        this.builtBlocks(fig);
+
     }
 
     show() {
