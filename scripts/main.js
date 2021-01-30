@@ -1,22 +1,29 @@
 let figure;
 let game;
+let field;
 let lastUpdate = 0;
 
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
     game = new Game();
-    let figID = int(random(figures.length));
-    figure = new Figure(0, 0, random(figureColors), figures[figID], figID);
+    field = new Field();
+    game.generateFigure();
+
+    setInterval(() => {
+        if(!game.paused)
+            figure.check();
+    }, 10);
 }
 
 function draw() {
     if (millis() - updatePerMillis >= lastUpdate) {
-        keyPooling();
+        //keyPooling();
         if (!game.paused) {
             background(backgroundColor);
 
             figure.show();
-            figure.updateCoords(0, velocity);
+            field.show();
+            figure.updateCoords(0, blockWidth);
         }
         lastUpdate = millis();
     }
@@ -38,5 +45,10 @@ function keyPressed() {
             figure.updateCoords(-blockWidth, 0);
         else if (keyCode == 82) // rotate (r)
             figure.rotate();
+        else if (keyCode == 84)
+        {
+            field.addFigure(figure);
+            game.generateFigure();
+        }
     }
 }

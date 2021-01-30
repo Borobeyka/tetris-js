@@ -12,13 +12,6 @@ class Block {
         square(this.x, this.y, blockWidth);
     }
 
-    getCoords() {
-        return {
-            x: this.x,
-            y: this.y
-        };
-    }
-
     updateCoords(x, y) {
         this.x += x;
         this.y += y;

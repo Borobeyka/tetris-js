@@ -7,10 +7,7 @@ class Figure {
         this.figureID = figureID;
         this.builtBlocks(figure, figureID);
         this.rotated = false;
-
-        setInterval(() => {
-            this.check();
-        }, updatePerMillis / 10);
+        print(this);
     }
 
     builtBlocks(figure) {
@@ -36,13 +33,6 @@ class Figure {
             this.blocks[i].show();
     }
 
-    getCoords() {
-        return {
-            x: this.x,
-            y: this.y
-        };
-    }
-
     updateCoords(x, y) {
         for (let i = 0; i < this.blocks.length; i++)
             this.blocks[i].updateCoords(x, y);
@@ -51,10 +41,26 @@ class Figure {
     }
 
     check() {
+        // check left & right sides
         let maxX = this.blocks.reduce((prev, cur) => cur.x > prev.x ? cur : prev).x + blockWidth;
         if (this.x < 0)
             this.updateCoords(blockWidth, 0);
         if (maxX > canvasWidth)
             this.updateCoords(- blockWidth, 0);
+
+
+        // check floor
+        let maxY = this.blocks.reduce((prev, cur) => cur.y > prev.y ? cur : prev).y + blockWidth;
+        if (maxY >= canvasHeight || this.isCollision())
+            field.addFigure(this);
+    }
+
+    isCollision() {
+        for (let i = 0; i < this.blocks.length; i++)
+            for (let j = 0; j < field.blocks.length; j++)
+                if (this.blocks[i].x == field.blocks[j].x && this.blocks[i].y == field.blocks[j].y ||
+                    this.blocks[i].x == field.blocks[j].x && this.blocks[i].y + blockWidth == field.blocks[j].y)
+                    return true;
+        return false;
     }
 }
