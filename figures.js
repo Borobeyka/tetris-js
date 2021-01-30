@@ -1,4 +1,4 @@
-let figures = [
+const figures = [
     [ 
         [1, 1, 1, 1]
     ],
