@@ -4,7 +4,7 @@ class Block {
         this.y = y;
         this.color = color;
     }
- 
+
     show() {
         stroke(strokeColor);
         strokeWeight(strokeWidth);
@@ -14,14 +14,9 @@ class Block {
 
     getCoords() {
         return {
-            x : this.x,
-            y : this.y
+            x: this.x,
+            y: this.y
         };
-    }
-
-    setCoords(x, y) {
-        this.x = x;
-        this.y = y;
     }
 
     updateCoords(x, y) {
