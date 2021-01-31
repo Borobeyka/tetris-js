@@ -19,9 +19,9 @@ class Figure {
 
     rotate() {
         let fig = figures[this.figureID];
-            for (let i = 0; i < this.rotateCount; i++)
-                fig = fig[0].map((_, index) => fig.map(row => row[index]).reverse());
-        if(this.rotateCount++ == 4) this.rotateCount = 1;
+        for (let i = 0; i < this.rotateCount; i++)
+            fig = fig[0].map((_, index) => fig.map(row => row[index]).reverse());
+        if (this.rotateCount++ == 4) this.rotateCount = 1;
         this.builtBlocks(fig);
     }
 
@@ -31,8 +31,10 @@ class Figure {
     }
 
     updateCoords(x, y) {
-        for (let i = 0; i < this.blocks.length; i++)
+        for (let i = 0; i < this.blocks.length; i++) {
             this.blocks[i].updateCoords(x, y);
+            this.blocks[i].show();
+        }
         this.x += x;
         this.y += y;
         this.check();
@@ -47,8 +49,13 @@ class Figure {
         if (maxX > canvasWidth)
             this.updateCoords(- blockWidth, 0);
 
-        // check floor
+        // check floor & blocks
         let maxY = this.blocks.reduce((prev, cur) => cur.y > prev.y ? cur : prev).y + blockWidth;
+        let diff = canvasHeight - maxY;
+
+        if(maxY > canvasHeight)
+            this.updateCoords(0, - abs(diff));
+
         if (maxY >= canvasHeight || this.isCollisionY())
             field.addFigure(this);
     }

@@ -16,21 +16,19 @@ function draw() {
         if (!game.paused) {
             background(backgroundColor);
 
+            print(game.score);
+
             figure.show();
             field.show();
-            figure.updateCoords(0, blockWidth);
+            figure.updateCoords(0, velocity);
         }
         lastUpdate = millis();
     }
 }
 
-function getUniqueElems(arr) {
-    return Array.from(new Set(arr));
-}
-
 function keyPooling() {
     if (!game.paused) {
-        if (keyIsDown(32)) figure.updateCoords(0, blockWidth);
+        if (keyIsDown(32)) figure.updateCoords(0, velocityFast);
     }
 }
 

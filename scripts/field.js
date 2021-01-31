@@ -3,14 +3,6 @@ class Field {
         this.blocks = [];
     }
 
-    getIndexByYCoord(y) {
-        for (let i = 0; i < this.blocks.length; i++) {
-            if (this.blocks[i].y == y)
-                return i;
-        }
-        return false;
-    }
-
     show() {
         for (let i = 0; i < this.blocks.length; i++)
             this.blocks[i].show();
@@ -20,32 +12,35 @@ class Field {
         for (let i = 0; i < figure.blocks.length; i++)
             this.blocks.push(figure.blocks[i]);
         game.generateFigure();
+        game.score++;
+    }
+
+    deleteBlocksByCoordY(y) {
+        //let len = this.blocks.length;
+        for (let i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].y == y) {
+                this.blocks.splice(i, 1);
+                this.deleteBlocksByCoordY(y);
+                break;
+            }
+        }
     }
 
     check() {
         let arr = [];
-        for (let i = 0; i < this.blocks.length; i++) \
+        for (let i = 0; i < this.blocks.length; i++)
             arr.push(this.blocks[i].y);
-        arr = getUniqueElems(arr);
-        print(arr);
-        // let flag = false;
-        // for (let j = 0; j < arr.length && !flag; j++) {
-        //     let count = 0;
 
-        //     for (let i = 0; i < this.blocks.length; i++) {
-        //         if (this.blocks[i].y == arr[j]) count++;
+        arr = arr.reduce((acc, el) => { acc[el] = (acc[el] || 0) + 1; return acc; }, {});
+        for(let key in arr) {
+            if(arr[key] == blocksPerWidth) {
+                this.deleteBlocksByCoordY(key);
+                for (let i = 0; i < this.blocks.length; i++)
+                    this.blocks[i].updateCoords(0, blockWidth);
+                this.check();
+                break;
+            }
+        }
 
-        //         print("j:" + j + " count:" + count);
-
-
-        //         if (count == blocksPerWidth) {
-        //             print("deleted");
-        //             for (let i = 0; i < this.blocks.length; i++)
-        //                 this.blocks[i].updateCoords(0, blockWidth);
-        //                 flag = true;
-        //             break;
-        //         }
-        //     }
-        // }
     }
 }
