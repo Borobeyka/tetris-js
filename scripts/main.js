@@ -9,16 +9,15 @@ function setup() {
     field = new Field();
     game.generateFigure();
 
-    setInterval(() => {
-        if(!game.paused)
-            figure.check();
-            field.checkOnUpdate();
-    }, 10);
+    // setInterval(() => {
+    //     if(!game.paused)
+    //         field.checkOnUpdate();
+    // }, 10);
 }
 
 function draw() {
     if (millis() - updatePerMillis >= lastUpdate) {
-        //keyPooling();
+        keyPooling();
         if (!game.paused) {
             background(backgroundColor);
 
@@ -32,7 +31,7 @@ function draw() {
 
 function keyPooling() {
     if (!game.paused) {
-        if (keyIsDown(32)) figure.updateCoords(0, velocityFast);
+        if (keyIsDown(32)) figure.updateCoords(0, blockWidth);
     }
 }
 
@@ -40,16 +39,13 @@ function keyPressed() {
     //print(keyCode);
     if (key == "Escape") game.paused = !game.paused;
     if (!game.paused) {
-        if (keyCode == 68) // right
+        if (keyCode == 68 && !figure.isCollisionX()) // right
             figure.updateCoords(blockWidth, 0);
-        else if (keyCode == 65) // left
+        else if (keyCode == 65 && !figure.isCollisionX()) // left
             figure.updateCoords(-blockWidth, 0);
         else if (keyCode == 82) // rotate (r)
             figure.rotate();
-        else if (keyCode == 84)
-        {
+        else if (keyCode == 84) // add figure to field (test)
             field.addFigure(figure);
-            game.generateFigure();
-        }
     }
 }

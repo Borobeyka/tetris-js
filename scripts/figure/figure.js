@@ -6,7 +6,7 @@ class Figure {
         this.blocks = [];
         this.figureID = figureID;
         this.builtBlocks(figure, figureID);
-        this.rotated = false;
+        this.rotateCount = 1;
     }
 
     builtBlocks(figure) {
@@ -19,10 +19,9 @@ class Figure {
 
     rotate() {
         let fig = figures[this.figureID];
-        if (!this.rotated)
-            for (let i = 0; i < 3; i++)
+            for (let i = 0; i < this.rotateCount; i++)
                 fig = fig[0].map((_, index) => fig.map(row => row[index]).reverse());
-        this.rotated = !this.rotated;
+        if(this.rotateCount++ == 4) this.rotateCount = 1;
         this.builtBlocks(fig);
     }
 
@@ -36,6 +35,7 @@ class Figure {
             this.blocks[i].updateCoords(x, y);
         this.x += x;
         this.y += y;
+        this.check();
     }
 
     check() {
@@ -46,18 +46,28 @@ class Figure {
         if (maxX > canvasWidth)
             this.updateCoords(- blockWidth, 0);
 
-
         // check floor
         let maxY = this.blocks.reduce((prev, cur) => cur.y > prev.y ? cur : prev).y + blockWidth;
-        if (maxY >= canvasHeight || this.isCollision())
+        if (maxY >= canvasHeight || this.isCollisionY())
             field.addFigure(this);
     }
 
-    isCollision() {
+    isCollisionY() {
         for (let i = 0; i < this.blocks.length; i++)
             for (let j = 0; j < field.blocks.length; j++)
                 if (this.blocks[i].x == field.blocks[j].x && this.blocks[i].y == field.blocks[j].y ||
                     this.blocks[i].x == field.blocks[j].x && this.blocks[i].y + blockWidth == field.blocks[j].y)
+                    return true;
+        return false;
+    }
+
+    isCollisionX() {
+        for (let i = 0; i < this.blocks.length; i++)
+            for (let j = 0; j < field.blocks.length; j++)
+                if (this.blocks[i].x == field.blocks[j].x && this.blocks[i].y == field.blocks[j].y ||
+                    this.blocks[i].x == field.blocks[j].x && this.blocks[i].y + blockWidth == field.blocks[j].y ||
+                    this.blocks[i].x + blockWidth == field.blocks[j].x && this.blocks[i].y == field.blocks[j].y ||
+                    this.blocks[i].x - blockWidth == field.blocks[j].x && this.blocks[i].y == field.blocks[j].y)
                     return true;
         return false;
     }
