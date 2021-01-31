@@ -8,11 +8,6 @@ function setup() {
     game = new Game();
     field = new Field();
     game.generateFigure();
-
-    // setInterval(() => {
-    //     if(!game.paused)
-    //         field.checkOnUpdate();
-    // }, 10);
 }
 
 function draw() {
@@ -27,6 +22,10 @@ function draw() {
         }
         lastUpdate = millis();
     }
+}
+
+function getUniqueElems(arr) {
+    return Array.from(new Set(arr));
 }
 
 function keyPooling() {

@@ -5,7 +5,7 @@ class Figure {
         this.color = color;
         this.blocks = [];
         this.figureID = figureID;
-        this.builtBlocks(figure, figureID);
+        this.builtBlocks(figure);
         this.rotateCount = 1;
     }
 
@@ -36,6 +36,7 @@ class Figure {
         this.x += x;
         this.y += y;
         this.check();
+        field.check();
     }
 
     check() {
