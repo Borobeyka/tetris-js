@@ -24,7 +24,8 @@ class Field {
 
     check() {
         let arr = [];
-        for (let i = 0; i < this.blocks.length; i++) arr.push(this.blocks[i].y);
+        for (let i = 0; i < this.blocks.length; i++) \
+            arr.push(this.blocks[i].y);
         arr = getUniqueElems(arr);
         print(arr);
         // let flag = false;
