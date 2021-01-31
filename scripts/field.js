@@ -49,10 +49,3 @@ class Field {
         // }
     }
 }
-
-class Matches {
-    constructor(index, value) {
-        this.index = index;
-        this.value = value;
-    }
-}
