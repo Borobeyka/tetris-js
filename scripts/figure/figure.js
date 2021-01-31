@@ -7,7 +7,6 @@ class Figure {
         this.figureID = figureID;
         this.builtBlocks(figure, figureID);
         this.rotated = false;
-        print(this);
     }
 
     builtBlocks(figure) {
@@ -25,7 +24,6 @@ class Figure {
                 fig = fig[0].map((_, index) => fig.map(row => row[index]).reverse());
         this.rotated = !this.rotated;
         this.builtBlocks(fig);
-
     }
 
     show() {

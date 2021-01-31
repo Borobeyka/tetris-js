@@ -12,6 +12,7 @@ function setup() {
     setInterval(() => {
         if(!game.paused)
             figure.check();
+            field.checkOnUpdate();
     }, 10);
 }
 
