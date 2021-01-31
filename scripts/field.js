@@ -1,6 +1,7 @@
 class Field {
     constructor() {
         this.blocks = [];
+        print(this);
     }
 
     show() {
@@ -12,11 +13,10 @@ class Field {
         for (let i = 0; i < figure.blocks.length; i++)
             this.blocks.push(figure.blocks[i]);
         game.generateFigure();
-        game.score++;
+        game.score += pointsPerFigure;
     }
 
     deleteBlocksByCoordY(y) {
-        //let len = this.blocks.length;
         for (let i = 0; i < this.blocks.length; i++) {
             if (this.blocks[i].y == y) {
                 this.blocks.splice(i, 1);

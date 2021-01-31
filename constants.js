@@ -12,16 +12,16 @@ const figureColors = [
 
 // SETTINGS
 // main
-const updatePerMillis = 10;
+const updatePerMillis = 20;
+const pointsPerFigure = 10;
 
 // block stats
 const blockWidth = 30;
 const strokeWidth = 1;
-const velocity = 1;
-const velocityFast = velocity * 5;
+const velocity = 3;
 
 // field
-const blocksPerWidth = 16;
-const blocksPerHeight = 22;
+const blocksPerWidth = 12;
+const blocksPerHeight = 15;
 const canvasWidth = blocksPerWidth * blockWidth;
 const canvasHeight = blocksPerHeight * blockWidth;

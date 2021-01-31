@@ -7,6 +7,7 @@ class Figure {
         this.figureID = figureID;
         this.builtBlocks(figure);
         this.rotateCount = 1;
+        print(this);
     }
 
     builtBlocks(figure) {
@@ -33,7 +34,7 @@ class Figure {
     updateCoords(x, y) {
         for (let i = 0; i < this.blocks.length; i++) {
             this.blocks[i].updateCoords(x, y);
-            this.blocks[i].show();
+            //this.blocks[i].show();
         }
         this.x += x;
         this.y += y;
@@ -60,11 +61,21 @@ class Figure {
             field.addFigure(this);
     }
 
+    isCollisionFastY() {
+        for (let i = 0; i < this.blocks.length; i++)
+            for (let j = 0; j < field.blocks.length; j++)
+                if (this.blocks[i].x == field.blocks[j].x && this.blocks[i].y == field.blocks[j].y ||
+                    this.blocks[i].x == field.blocks[j].x && this.blocks[i].y + blockWidth >= field.blocks[j].y ||
+                    this.blocks[i].x == field.blocks[j].x && this.blocks[i].y + blockWidth + velocityFast >= field.blocks[j].y)
+                    return true;
+        return false;
+    }
+
     isCollisionY() {
         for (let i = 0; i < this.blocks.length; i++)
             for (let j = 0; j < field.blocks.length; j++)
                 if (this.blocks[i].x == field.blocks[j].x && this.blocks[i].y == field.blocks[j].y ||
-                    this.blocks[i].x == field.blocks[j].x && this.blocks[i].y + blockWidth == field.blocks[j].y)
+                    this.blocks[i].x == field.blocks[j].x && this.blocks[i].y + blockWidth >= field.blocks[j].y)
                     return true;
         return false;
     }

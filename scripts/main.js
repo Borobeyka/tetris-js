@@ -12,23 +12,15 @@ function setup() {
 
 function draw() {
     if (millis() - updatePerMillis >= lastUpdate) {
-        keyPooling();
         if (!game.paused) {
             background(backgroundColor);
-
-            print(game.score);
 
             figure.show();
             field.show();
             figure.updateCoords(0, velocity);
+            document.getElementById("score").innerHTML = game.score;
         }
         lastUpdate = millis();
-    }
-}
-
-function keyPooling() {
-    if (!game.paused) {
-        if (keyIsDown(32)) figure.updateCoords(0, velocityFast);
     }
 }
 
@@ -39,7 +31,7 @@ function keyPressed() {
         if (keyCode == 68 && !figure.isCollisionX()) // right
             figure.updateCoords(blockWidth, 0);
         else if (keyCode == 65 && !figure.isCollisionX()) // left
-            figure.updateCoords(-blockWidth, 0);
+            figure.updateCoords(- blockWidth, 0);
         else if (keyCode == 82) // rotate (r)
             figure.rotate();
         else if (keyCode == 84) // add figure to field (test)
