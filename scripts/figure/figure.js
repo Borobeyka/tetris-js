@@ -4,8 +4,8 @@ class Figure {
         this.y = y;
         this.color = color;
         this.blocks = [];
-        this.figureID = figureID;
         this.builtBlocks(figure);
+        this.figureID = figureID;
         this.rotateCount = 1;
     }
 
