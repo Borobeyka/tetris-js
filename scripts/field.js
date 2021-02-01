@@ -1,7 +1,6 @@
 class Field {
     constructor() {
         this.blocks = [];
-        print(this);
     }
 
     show() {

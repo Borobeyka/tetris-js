@@ -7,7 +7,6 @@ class Figure {
         this.figureID = figureID;
         this.builtBlocks(figure);
         this.rotateCount = 1;
-        print(this);
     }
 
     builtBlocks(figure) {
@@ -61,6 +60,7 @@ class Figure {
             field.addFigure(this);
     }
 
+    /*
     isCollisionFastY() {
         for (let i = 0; i < this.blocks.length; i++)
             for (let j = 0; j < field.blocks.length; j++)
@@ -70,6 +70,7 @@ class Figure {
                     return true;
         return false;
     }
+    */
 
     isCollisionY() {
         for (let i = 0; i < this.blocks.length; i++)
