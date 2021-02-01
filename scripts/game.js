@@ -1,6 +1,7 @@
 class Game {
     constructor() {
         this.paused = false;
+        this.over = false;
         this.score = 0;
     }
 
@@ -9,7 +10,7 @@ class Game {
             for(let j = 0; j < canvasWidth; j++) {
                 for(let k = 0; k < 3 * blockWidth; k++) {
                     if(field.blocks[i].x == j && field.blocks[i].y == k) {
-                        game.paused = true;
+                        game.over = true;
                         noLoop();
                     }
                 }

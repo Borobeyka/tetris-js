@@ -10,6 +10,8 @@ function setup() {
     game = new Game();
     field = new Field();
     game.generateFigure();
+    document.getElementById("version").style.width = canvasWidth + "px";
+    document.getElementById("version").innerHTML = version;
 }
 
 function draw() {
@@ -22,7 +24,9 @@ function draw() {
             field.show();
             figure.updateCoords(0, velocity);
         }
-        document.getElementById("score").innerHTML = "Score: " + game.score + (game.paused ? " <strong>PAUSED</strong>" : "");
+        document.getElementById("score").innerHTML = "Score: " + game.score +
+            (game.paused ? " <strong>PAUSED</strong>" : "") +
+            (game.over ? " <strong>GAME OVER</strong>" : "");
         lastUpdate = millis();
     }
 }

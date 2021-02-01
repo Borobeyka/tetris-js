@@ -12,6 +12,7 @@ const figureColors = [
 
 // SETTINGS
 // main
+const version = "0.99 stable [01.02.2021]";
 const updatePerMillis = 10;
 const points = [
     10, // points per each figure
