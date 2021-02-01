@@ -12,7 +12,7 @@ class Field {
         for (let i = 0; i < figure.blocks.length; i++)
             this.blocks.push(figure.blocks[i]);
         game.generateFigure();
-        game.score += pointsPerFigure;
+        game.score += points[0];
     }
 
     deleteBlocksByCoordY(y) {
@@ -35,8 +35,10 @@ class Field {
             if(arr[key] == blocksPerWidth) {
                 this.deleteBlocksByCoordY(key);
                 for (let i = 0; i < this.blocks.length; i++)
-                    this.blocks[i].updateCoords(0, blockWidth);
+                    if(this.blocks[i].y > 0 && this.blocks[i].y <= key - blockWidth)
+                        this.blocks[i].updateCoords(0, blockWidth);
                 this.check();
+                game.score += points[1];
                 break;
             }
         }

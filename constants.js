@@ -13,7 +13,10 @@ const figureColors = [
 // SETTINGS
 // main
 const updatePerMillis = 10;
-const pointsPerFigure = 10;
+const points = [
+    10, // points per each figure
+    30  // points for complete a line
+];
 
 // block stats
 const blockWidth = 30;
