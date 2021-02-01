@@ -18,7 +18,7 @@ function draw() {
             figure.show();
             field.show();
             figure.updateCoords(0, velocity);
-            document.getElementById("score").innerHTML = game.score;
+            document.getElementById("score").innerHTML = "Score: " + game.score;
         }
         lastUpdate = millis();
     }

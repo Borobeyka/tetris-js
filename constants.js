@@ -12,13 +12,13 @@ const figureColors = [
 
 // SETTINGS
 // main
-const updatePerMillis = 20;
+const updatePerMillis = 10;
 const pointsPerFigure = 10;
 
 // block stats
 const blockWidth = 30;
 const strokeWidth = 1;
-const velocity = 3;
+const velocity = 2;
 
 // field
 const blocksPerWidth = 12;
