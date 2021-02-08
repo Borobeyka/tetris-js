@@ -12,7 +12,7 @@ const figureColors = [
 
 // SETTINGS
 // main
-const version = "0.99 stable [01.02.2021]";
+const version = "0.99 stable [08.02.2021]";
 const updatePerMillis = 10;
 const points = [
     10, // points per each figure
@@ -26,6 +26,6 @@ const velocity = 2;
 
 // field
 const blocksPerWidth = 12;
-const blocksPerHeight = 15;
+const blocksPerHeight = 20;
 const canvasWidth = blocksPerWidth * blockWidth;
 const canvasHeight = blocksPerHeight * blockWidth;
