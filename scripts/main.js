@@ -11,6 +11,7 @@ function setup() {
     field = new Field();
     game.generateFigure();
     document.getElementById("version").style.width = canvasWidth + "px";
+    document.getElementById("about").style.width = canvasWidth + "px";
     document.getElementById("version").innerHTML = version;
 }
 
