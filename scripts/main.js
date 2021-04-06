@@ -81,7 +81,7 @@ jQuery('body').swipe( {
                 else commandCount++;
                 command = 2;
             }
-            if(direction == "down")
+            if(direction == "up")
                 figure.rotate();
         }
     },
