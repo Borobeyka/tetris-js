@@ -47,6 +47,7 @@ function keyPooling() {
 
 function keyPressed() {
     //print(keyCode);
+    
     if (key == "Escape") game.paused = !game.paused;
     if (!game.paused) {
         if (keyCode == 68 && !figure.isCollisionX()) { // right
@@ -61,10 +62,29 @@ function keyPressed() {
         }
         else if (keyCode == 82) // rotate (r)
             figure.rotate();
-
-        /*
-            else if (keyCode == 84) // add figure to field (test)
-            field.addFigure(figure);
-        */
     }
 }
+
+jQuery('body').swipe( {
+    swipeStatus:function(event, phase, direction, distance, duration, fingerCount, fingerData, currentDirection)
+    {
+        if (phase == "end" && !game.paused) { 
+            if (direction == "right" && !figure.isCollisionX())
+            {
+                if (command != 1) commandCount = 1;
+                else commandCount++;
+                command = 1;
+            }
+            if (direction == "left" && !figure.isCollisionX())
+            {
+                if (command != 2) commandCount = 1;
+                else commandCount++;
+                command = 2;
+            }
+            if(direction == "down")
+                figure.rotate();
+        }
+    },
+    triggerOnTouchEnd:false,
+    threshold:20 // сработает через 20 пикселей
+});
